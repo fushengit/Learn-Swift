@@ -7,7 +7,8 @@
 	5.转换成string
 	6.释放C语言对象
 	7.推荐使用guard 依次判断可选项
-    8.需要注意的是  使用private 的时候，并非只能获取得到非私有的属性，通过运行时也可以获取到私有属性
+    8.需要注意的是  使用private 的时候，并非只能获取得到非私有的属性，通过运行时也可以获取到私有属性.下面连个例子就是参照说明
+ 
  */
 
 import UIKit
@@ -17,6 +18,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         print(Person.varlists(), Person.propertys());
+        
     }
 }
 class Person: NSObject {
@@ -52,5 +54,6 @@ class Person: NSObject {
         }
         free(propertyList)
         return result;
+        
     }
 }
