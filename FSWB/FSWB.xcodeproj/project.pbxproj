@@ -17,6 +17,7 @@
 		9DC24C051EC94D3A00B17084 /* FSMessageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC24C041EC94D3A00B17084 /* FSMessageController.swift */; };
 		9DC24C071EC94D4E00B17084 /* FSDiscoverController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC24C061EC94D4E00B17084 /* FSDiscoverController.swift */; };
 		9DC24C091EC94D6000B17084 /* FSProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC24C081EC94D6000B17084 /* FSProfileController.swift */; };
+		9DC24C0B1EC9782000B17084 /* FSDemoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC24C0A1EC9782000B17084 /* FSDemoController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		9DC24C041EC94D3A00B17084 /* FSMessageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FSMessageController.swift; sourceTree = "<group>"; };
 		9DC24C061EC94D4E00B17084 /* FSDiscoverController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FSDiscoverController.swift; sourceTree = "<group>"; };
 		9DC24C081EC94D6000B17084 /* FSProfileController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FSProfileController.swift; sourceTree = "<group>"; };
+		9DC24C0A1EC9782000B17084 /* FSDemoController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FSDemoController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +116,7 @@
 			isa = PBXGroup;
 			children = (
 				9DC24C021EC94D2500B17084 /* FSHomeController.swift */,
+				9DC24C0A1EC9782000B17084 /* FSDemoController.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -228,6 +231,7 @@
 				9DC24C071EC94D4E00B17084 /* FSDiscoverController.swift in Sources */,
 				9DA8D6791EC5C99800350D1C /* FSBaseViewController.swift in Sources */,
 				9DC24C051EC94D3A00B17084 /* FSMessageController.swift in Sources */,
+				9DC24C0B1EC9782000B17084 /* FSDemoController.swift in Sources */,
 				9DA8D6751EC5C71D00350D1C /* FSMainTabbarController.swift in Sources */,
 				9DA8D6771EC5C97B00350D1C /* FSBaseNavigationController.swift in Sources */,
 				9DA8D65A1EC5C22100350D1C /* AppDelegate.swift in Sources */,
@@ -338,6 +342,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				DEVELOPMENT_TEAM = QBA33C9ENG;
 				INFOPLIST_FILE = FSWB/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.MakeKeyReuseable.FSWB;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -352,6 +357,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				DEVELOPMENT_TEAM = QBA33C9ENG;
 				INFOPLIST_FILE = FSWB/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.MakeKeyReuseable.FSWB;
 				PRODUCT_NAME = "$(TARGET_NAME)";

@@ -16,6 +16,7 @@ class FSMainTabbarController: UITabBarController {
         setUpComposeBtn()
     }
     
+    //FIXME: 未实现真实跳转
     //评论按钮点击事件
     @objc func composeAction(){
         print("我要发表")
@@ -62,6 +63,7 @@ extension FSMainTabbarController{
         vc.title = titleName
         vc.tabBarItem.image = UIImage(named: imageName)?.withRenderingMode(.alwaysOriginal)
         vc.tabBarItem.selectedImage = UIImage(named: imageName + "_selected")?.withRenderingMode(.alwaysOriginal)
+        //设置颜色  可以根据业务要求写字体大小
         vc.tabBarItem.setTitleTextAttributes([NSForegroundColorAttributeName :UIColor.darkGray], for: UIControlState.init(rawValue: 0))
         vc.tabBarItem.setTitleTextAttributes([NSForegroundColorAttributeName :UIColor.orange], for: .highlighted)
         return FSBaseNavigationController.init(rootViewController: vc)
