@@ -21,18 +21,31 @@ class FSBaseViewController: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        //设置背景色
-//        view.backgroundColor = UIColor(red: CGFloat(arc4random()%255)/255, green: CGFloat(arc4random()%255)/255, blue: CGFloat(arc4random()%255)/255, alpha: 1)
+        //设置UI
+        setUI()
+    }
+    //MARK: 子类继承网络数据请求方法
+    @objc func loadData() {
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+2) {
+            print("请求网络数据")
+            if #available(iOS 10.0, *) {
+                self.mainTableView?.refreshControl?.endRefreshing()
+            } else {
+                // Fallback on earlier versions
+            }
+        }
+    }
+}
+
+//MARK: UI设置方法
+extension FSBaseViewController:UITableViewDelegate,UITableViewDataSource{
+    fileprivate func setUI() {
         view.backgroundColor = UIColor.white
         //导航栏设置
         setNavBar()
         //tableview设置
         setTableView()
     }
-    
-}
-
-extension FSBaseViewController:UITableViewDelegate,UITableViewDataSource{
     
     //MARK: 子类可继承设置navgationbar
     //自定义导航栏（pop滑动时防止重合）
@@ -60,9 +73,15 @@ extension FSBaseViewController:UITableViewDelegate,UITableViewDataSource{
         automaticallyAdjustsScrollViewInsets = false
         //tableview偏移
         mainTableView?.contentInset = UIEdgeInsetsMake(64, 0, 64, 0)
+        let refreshControl = UIRefreshControl()
+        if #available(iOS 10.0, *) {
+            mainTableView?.refreshControl = refreshControl
+        } else {
+            // Fallback on earlier versions
+        }
+        refreshControl.addTarget(self, action: #selector(loadData), for: .valueChanged)
     }
 }
-
 
 //MARK: 子类可继承封装的UITableViewDelegate,UITableViewDataSource
 extension FSBaseViewController{

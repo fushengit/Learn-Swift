@@ -23,11 +23,20 @@ class FSHomeController: FSBaseViewController {
         myBarItem.leftBarButtonItem = UIBarButtonItem(title: "好友", style: .plain, target: self, action: #selector(friendAction))
     }
     
+    override func setTableView() {
+        super.setTableView()
+        mainTableView?.showsVerticalScrollIndicator = false
+    }
+    
+    override func loadData() {
+        //开始请求数据
+        super.loadData()
+    }
+    
     //FIXME: 未实现真实跳转
     @objc private func friendAction() {
         print("跳转好友页面")
     }
-    
 }
 
 
