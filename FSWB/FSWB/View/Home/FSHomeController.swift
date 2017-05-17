@@ -10,26 +10,38 @@ import UIKit
 
 class FSHomeController: FSBaseViewController {
 
+    lazy var datasArray:[String] = [String]()
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        setNavBar()
+        for i in 0..<15 {
+            datasArray.append(String.init(format: "第%d条数据", i))
+        }
     }
     
-    func setNavBar() {
+    override func setNavBar() {
+        super.setNavBar()
         myBarItem.leftBarButtonItem = UIBarButtonItem(title: "好友", style: .plain, target: self, action: #selector(friendAction))
-        myBarItem.leftBarButtonItem?.setTitleTextAttributes([NSForegroundColorAttributeName:UIColor.darkGray], for: .normal)
     }
     
     //FIXME: 未实现真实跳转
     @objc private func friendAction() {
         print("跳转好友页面")
-        navigationController?.pushViewController(FSDemoController(), animated: true)
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+}
+
+
+extension FSHomeController{
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return datasArray.count
     }
     
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        var cell = tableView.dequeueReusableCell(withIdentifier: "cellId")
+        if cell == nil {
+            cell = UITableViewCell.init(style: .default, reuseIdentifier: "cellId")
+        }
+        cell?.textLabel?.text = datasArray[indexPath.row]
+        return cell!
+    }
 }
