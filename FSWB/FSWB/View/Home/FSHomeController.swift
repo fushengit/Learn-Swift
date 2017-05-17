@@ -10,12 +10,12 @@ import UIKit
 
 class FSHomeController: FSBaseViewController {
 
-    lazy var datasArray:[String] = [String]()
+    lazy var datasArray:[String] = [String]() //数据源
+    
+    var isLoadMore = false //是否是加载更多事件
     override func viewDidLoad() {
         super.viewDidLoad()
-        for i in 0..<15 {
-            datasArray.append(String.init(format: "第%d条数据", i))
-        }
+        loadData()
     }
     
     override func setNavBar() {
@@ -30,7 +30,24 @@ class FSHomeController: FSBaseViewController {
     
     override func loadData() {
         //开始请求数据
-        super.loadData()
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+2) {
+            if self.isLoadMore == true {
+                for i in 0..<15 {
+                    self.datasArray.append(String.init(format: "第%ld条数据", i+self.datasArray.count))
+                }
+            }else{
+                for i in 0..<15 {
+                    self.datasArray.insert(String.init(format: "第%ld条数据", i+self.datasArray.count), at: 0)
+                }
+            }
+            self.isLoadMore = false
+            self.mainTableView?.reloadData()
+            if #available(iOS 10.0, *) {
+                self.mainTableView?.refreshControl?.endRefreshing()
+            } else {
+                // Fallback on earlier versions
+            }
+        }
     }
     
     //FIXME: 未实现真实跳转
@@ -52,5 +69,15 @@ extension FSHomeController{
         }
         cell?.textLabel?.text = datasArray[indexPath.row]
         return cell!
+    }
+    
+    //无缝上拉加载更多
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        let row = indexPath.row
+        //这里判断到滑到最后一个
+        if row == datasArray.count-1 {
+            isLoadMore = true
+            loadData()
+        }
     }
 }
