@@ -11,7 +11,10 @@ import UIKit
 class FSBaseViewController: UIViewController {
     //MARK: 自定义的导航栏，后期操作导航栏全部使用这个
     lazy var myBarItem:UINavigationItem = UINavigationItem()
+    lazy var myNavBar = UINavigationBar(frame: CGRect.init(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 64))
     var mainTableView:UITableView?
+    var visiterView:FSVisiterView?
+    var isLoginOn = false
     
     //重写set方法实现自定义的问题
     override var title: String?{
@@ -43,15 +46,14 @@ extension FSBaseViewController:UITableViewDelegate,UITableViewDataSource{
         view.backgroundColor = UIColor.white
         //导航栏设置
         setNavBar()
-        //tableview设置
-        setTableView()
+        //tableview设置/访客视图设置
+        isLoginOn ? setTableView():setVisiterView()
     }
     
     //MARK: 子类可继承设置navgationbar
     //自定义导航栏（pop滑动时防止重合）
     func setNavBar() {
         //注意这里必须要设置大小，否则将不会显示
-        let myNavBar = UINavigationBar(frame: CGRect.init(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 64))
         myNavBar.items = [myBarItem]
         view.addSubview(myNavBar)
         myBarItem.title = title
@@ -80,6 +82,10 @@ extension FSBaseViewController:UITableViewDelegate,UITableViewDataSource{
             // Fallback on earlier versions
         }
         refreshControl.addTarget(self, action: #selector(loadData), for: .valueChanged)
+    }
+    func setVisiterView() {
+        visiterView = FSVisiterView(frame: view.bounds)
+        view.insertSubview(visiterView!, at: 0)
     }
 }
 

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9D785C991ECC65FE00D080E1 /* FSVisiterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D785C981ECC65FE00D080E1 /* FSVisiterView.swift */; };
 		9DA8D65A1EC5C22100350D1C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DA8D6591EC5C22100350D1C /* AppDelegate.swift */; };
 		9DA8D6611EC5C22100350D1C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9DA8D6601EC5C22100350D1C /* Assets.xcassets */; };
 		9DA8D6751EC5C71D00350D1C /* FSMainTabbarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DA8D6741EC5C71D00350D1C /* FSMainTabbarController.swift */; };
@@ -21,6 +22,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9D785C981ECC65FE00D080E1 /* FSVisiterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FSVisiterView.swift; sourceTree = "<group>"; };
 		9DA8D6561EC5C22100350D1C /* FSWB.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FSWB.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9DA8D6591EC5C22100350D1C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9DA8D6601EC5C22100350D1C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -127,6 +129,7 @@
 				9DA8D6741EC5C71D00350D1C /* FSMainTabbarController.swift */,
 				9DA8D6761EC5C97B00350D1C /* FSBaseNavigationController.swift */,
 				9DA8D6781EC5C99800350D1C /* FSBaseViewController.swift */,
+				9D785C981ECC65FE00D080E1 /* FSVisiterView.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -227,6 +230,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9DC24C091EC94D6000B17084 /* FSProfileController.swift in Sources */,
+				9D785C991ECC65FE00D080E1 /* FSVisiterView.swift in Sources */,
 				9DA8D67D1EC5CBF100350D1C /* Bundle+Extention.swift in Sources */,
 				9DC24C071EC94D4E00B17084 /* FSDiscoverController.swift in Sources */,
 				9DA8D6791EC5C99800350D1C /* FSBaseViewController.swift in Sources */,

@@ -65,7 +65,7 @@ extension FSMainTabbarController{
         vc.tabBarItem.selectedImage = UIImage(named: imageName + "_selected")?.withRenderingMode(.alwaysOriginal)
         //设置颜色  可以根据业务要求写字体大小
         vc.tabBarItem.setTitleTextAttributes([NSForegroundColorAttributeName :UIColor.darkGray], for: UIControlState.init(rawValue: 0))
-        vc.tabBarItem.setTitleTextAttributes([NSForegroundColorAttributeName :UIColor.orange], for: .highlighted)
+        vc.tabBarItem.setTitleTextAttributes([NSForegroundColorAttributeName :UIColor.orange], for: .selected)
         return FSBaseNavigationController.init(rootViewController: vc)
     }
 }
