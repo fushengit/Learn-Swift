@@ -10,6 +10,7 @@ import UIKit
 
 class FSMainTabbarController: UITabBarController {
     override func viewDidLoad() {
+        
         //设置字控制器
         setUpChildControllers()
         //设置评论按钮
@@ -25,25 +26,10 @@ class FSMainTabbarController: UITabBarController {
 
 extension FSMainTabbarController{
     func setUpChildControllers(){
-        let array:[[String:Any]] = [
-            ["className":"FSHomeController","titleName":"首页","imageName":"tabbar_home",
-             "visitorInfo":["imageName":"tabbar_home","titleText":"请登录，登录后首页更精彩！注册用户首页分享999大红包"]
-            ],
-            
-            ["className":"FSMessageController","titleName":"消息","imageName":"tabbar_message_center",
-             "visitorInfo":["imageName":"tabbar_message_center","titleText":"请登录，登录后消息更精彩！注册用户消息分享999大红包"]
-            ],
-            
-            ["className":"","titleName":"","imageName":""],
-            
-            ["className":"FSDiscoverController","titleName":"发现","imageName":"tabbar_discover",
-             "visitorInfo":["imageName":"tabbar_discover","titleText":"请登录，登录后发现更精彩！注册用户发现分享999大红包"]
-            ],
-            
-            ["className":"FSProfileController","titleName":"我","imageName":"tabbar_profile",
-             "visitorInfo":["imageName":"tabbar_profile","titleText":"请登录，登录后个人更精彩！注册用户跟人分享999大红包"]
-            ],
-        ]
+        guard let jsonPatch =  Bundle.main.path(forResource: "main.json", ofType: nil),
+            let array = NSArray(contentsOfFile: jsonPatch) as? [[String:Any]] else {
+            return
+        }
         var controllers:[FSBaseNavigationController] = [FSBaseNavigationController]()
         for dict in array {
             controllers.append(getController(dict: dict))

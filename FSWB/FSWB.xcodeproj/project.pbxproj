@@ -19,6 +19,7 @@
 		9DC24C071EC94D4E00B17084 /* FSDiscoverController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC24C061EC94D4E00B17084 /* FSDiscoverController.swift */; };
 		9DC24C091EC94D6000B17084 /* FSProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC24C081EC94D6000B17084 /* FSProfileController.swift */; };
 		9DC24C0B1EC9782000B17084 /* FSDemoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC24C0A1EC9782000B17084 /* FSDemoController.swift */; };
+		9DDBFF011ECD4B4000999705 /* main.json in Resources */ = {isa = PBXBuildFile; fileRef = 9DDBFF001ECD4B4000999705 /* main.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		9DC24C061EC94D4E00B17084 /* FSDiscoverController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FSDiscoverController.swift; sourceTree = "<group>"; };
 		9DC24C081EC94D6000B17084 /* FSProfileController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FSProfileController.swift; sourceTree = "<group>"; };
 		9DC24C0A1EC9782000B17084 /* FSDemoController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FSDemoController.swift; sourceTree = "<group>"; };
+		9DDBFF001ECD4B4000999705 /* main.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = main.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,6 +128,7 @@
 		9DA8D6701EC5C6BD00350D1C /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				9DDBFF001ECD4B4000999705 /* main.json */,
 				9DA8D6741EC5C71D00350D1C /* FSMainTabbarController.swift */,
 				9DA8D6761EC5C97B00350D1C /* FSBaseNavigationController.swift */,
 				9DA8D6781EC5C99800350D1C /* FSBaseViewController.swift */,
@@ -218,6 +221,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9DDBFF011ECD4B4000999705 /* main.json in Resources */,
 				9DA8D6611EC5C22100350D1C /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
