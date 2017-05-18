@@ -11,21 +11,11 @@ import UIKit
 class FSHomeController: FSBaseViewController {
 
     lazy var datasArray:[String] = [String]() //数据源
-    
     var isLoadMore = false //是否是加载更多事件
+
     override func viewDidLoad() {
         super.viewDidLoad()
         loadData()
-    }
-    
-    override func setNavBar() {
-        super.setNavBar()
-        myBarItem.leftBarButtonItem = UIBarButtonItem(title: "好友", style: .plain, target: self, action: #selector(friendAction))
-    }
-    
-    override func setTableView() {
-        super.setTableView()
-        mainTableView?.showsVerticalScrollIndicator = false
     }
     
     override func loadData() {
@@ -51,12 +41,39 @@ class FSHomeController: FSBaseViewController {
     }
     
     //FIXME: 未实现真实跳转
-    @objc private func friendAction() {
+    @objc fileprivate func friendAction() {
         print("跳转好友页面")
+    }
+    //FIXME: 未实现登录真实逻辑
+    @objc fileprivate func loginAction() {
+        print("登录事件")
     }
 }
 
 
+
+//MARK: UI设置
+extension FSHomeController{
+    override func setNavBar() {
+        super.setNavBar()
+    }
+    override func setTableView() {
+        super.setTableView()
+        mainTableView?.showsVerticalScrollIndicator = false
+        myNavBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.darkGray]
+        myNavBar.tintColor = UIColor.darkGray
+        myBarItem.leftBarButtonItem = UIBarButtonItem(title: "好友", style: .plain, target: self, action: #selector(friendAction))
+    }
+    override func setVisiterView() {
+        super.setVisiterView()
+        myNavBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.orange]
+        myNavBar.tintColor = UIColor.orange
+        myBarItem.leftBarButtonItem = UIBarButtonItem(title: "登录", style: .plain, target: self, action: #selector(loginAction))
+    }
+}
+
+
+//MARK: tableviewDataSource  tableviewDelegate
 extension FSHomeController{
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return datasArray.count

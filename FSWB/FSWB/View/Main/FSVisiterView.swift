@@ -9,7 +9,24 @@
 import UIKit
 
 class FSVisiterView: UIView {
+    let imageView = UIImageView()
+    let titleLabel = UILabel()
 
+    //MARK: visitorInfo 目前需要包含两个key：imageName，titleText
+    var visitorInfo:[String:String]? {
+        didSet{
+            if let imageName = visitorInfo?["imageName"]
+            {
+                imageView.image = UIImage(named: imageName);
+                
+            }
+            if let titleText = visitorInfo?["titleText"]
+            {
+                titleLabel.text = titleText
+            }
+        }
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setUI()
@@ -23,7 +40,6 @@ class FSVisiterView: UIView {
 //MARK: UI设置  核心动画&自动布局
 extension FSVisiterView{
     func setUI(){
-        let imageView = UIImageView(image: UIImage(named: "tabbar_home_selected"))
         addSubview(imageView)
         //核心动画
         let anmaintion = CABasicAnimation(keyPath: "transform.rotation")
@@ -35,11 +51,8 @@ extension FSVisiterView{
          * active duration has passed. Defaults to YES. */
         anmaintion.isRemovedOnCompletion = false
         imageView.layer.add(anmaintion, forKey: nil)
-
         
-        let titleLabel = UILabel()
         titleLabel.textAlignment = .center
-        titleLabel.text = "请登录，登录过后首页更精彩。若未注册赶紧注册看首页精彩"
         titleLabel.textColor = UIColor.darkGray
         titleLabel.numberOfLines = 0
         addSubview(titleLabel)

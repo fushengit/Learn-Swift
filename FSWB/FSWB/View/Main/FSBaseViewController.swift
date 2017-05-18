@@ -14,6 +14,7 @@ class FSBaseViewController: UIViewController {
     lazy var myNavBar = UINavigationBar(frame: CGRect.init(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 64))
     var mainTableView:UITableView?
     var visiterView:FSVisiterView?
+    var visiterInfo:[String:String]?
     var isLoginOn = false
     
     //重写set方法实现自定义的问题
@@ -85,6 +86,7 @@ extension FSBaseViewController:UITableViewDelegate,UITableViewDataSource{
     }
     func setVisiterView() {
         visiterView = FSVisiterView(frame: view.bounds)
+        visiterView?.visitorInfo = visiterInfo
         view.insertSubview(visiterView!, at: 0)
     }
 }
