@@ -32,7 +32,6 @@ extension FSMainTabbarController{
         self.viewControllers = controllers
     }
     
-    
     func setUpComposeBtn() {
         let composeBtn = UIButton(type: .custom)
         tabBar.addSubview(composeBtn)
