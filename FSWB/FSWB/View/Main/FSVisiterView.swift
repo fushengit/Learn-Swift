@@ -9,8 +9,8 @@
 import UIKit
 
 class FSVisiterView: UIView {
-    let imageView = UIImageView()
-    let titleLabel = UILabel()
+    fileprivate let imageView = UIImageView()
+    fileprivate let titleLabel = UILabel()
 
     //MARK: visitorInfo 目前需要包含两个key：imageName，titleText
     var visitorInfo:[String:String]? {

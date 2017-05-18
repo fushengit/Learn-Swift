@@ -10,7 +10,6 @@ import UIKit
 
 class FSMainTabbarController: UITabBarController {
     override func viewDidLoad() {
-        
         //设置字控制器
         setUpChildControllers()
         //设置评论按钮
@@ -26,16 +25,13 @@ class FSMainTabbarController: UITabBarController {
 
 extension FSMainTabbarController{
     func setUpChildControllers(){
-        guard let jsonPatch =  Bundle.main.path(forResource: "main.json", ofType: nil),
-            let array = NSArray(contentsOfFile: jsonPatch) as? [[String:Any]] else {
-            return
-        }
         var controllers:[FSBaseNavigationController] = [FSBaseNavigationController]()
-        for dict in array {
+        for dict in requestMainInfo() {
             controllers.append(getController(dict: dict))
         }
         self.viewControllers = controllers
     }
+    
     
     func setUpComposeBtn() {
         let composeBtn = UIButton(type: .custom)
@@ -70,5 +66,31 @@ extension FSMainTabbarController{
         vc.tabBarItem.image = UIImage(named: imageNameStr)?.withRenderingMode(.alwaysOriginal)
         vc.tabBarItem.selectedImage = UIImage(named: imageNameStr + "_selected")?.withRenderingMode(.alwaysOriginal);
         return FSBaseNavigationController.init(rootViewController: vc)
+    }
+
+    //MARK: 返回从磁盘中获取的控制器数据 ，然后从服务器请求控制器数据json以便下次启动使用
+    private func requestMainInfo() ->[[String:Any]] {
+        let filePathStr = String(format: "%@/Library/Caches/resultMain.json", NSHomeDirectory())
+        print(filePathStr)
+        //读取磁盘中的配置
+        var array:[[String:Any]]? = NSArray.init(contentsOfFile: filePathStr) as? [[String:Any]]
+        //磁盘中如果没有，则读项目中默认的配置
+        if array == nil {
+            if let jsonPatch = Bundle.main.path(forResource: "main.json", ofType: nil) {
+                array = NSArray(contentsOfFile: jsonPatch) as? [[String:Any]]
+            }
+        }
+        //这里我们模拟网络请求 并把请求的数据写入磁盘
+        URLSession.shared.dataTask(with: URL.init(string: "http://www.baidu.com")!) { (data, response, error) in
+            if error == nil{
+                //这里我们把项目里面默认的写进磁盘做测试
+                if let dataPath = Bundle.main.path(forResource: "main.json", ofType: nil) {
+                    let dataArray = NSArray(contentsOfFile: dataPath);
+                    let result =  dataArray?.write(toFile: filePathStr, atomically: true)
+                    print("操作结果：\(result)")
+                }
+            }
+        }.resume()
+        return array!
     }
 }
