@@ -10,7 +10,7 @@ import UIKit
 
 class FSHomeController: FSBaseViewController {
 
-    lazy var datasArray:[String] = [String]() //数据源
+    lazy var statusesViewModel = FSStatusesViewModel()
     var isLoadMore = false //是否是加载更多事件
 
     override func viewDidLoad() {
@@ -19,23 +19,18 @@ class FSHomeController: FSBaseViewController {
     }
     
     override func loadData() {
-        //开始请求数据
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+2) {
-            if self.isLoadMore == true {
-                for i in 0..<15 {
-                    self.datasArray.append(String.init(format: "第%ld条数据", i+self.datasArray.count))
+        statusesViewModel.loadData(isLoadMore: isLoadMore) { (isSucc, errorStr) in
+            if isSucc{
+                self.isLoadMore = false
+                self.mainTableView?.reloadData()
+                if #available(iOS 10.0, *) {
+                    self.mainTableView?.refreshControl?.endRefreshing()
+                } else {
+                    // Fallback on earlier versions
                 }
             }else{
-                for i in 0..<15 {
-                    self.datasArray.insert(String.init(format: "第%ld条数据", i+self.datasArray.count), at: 0)
-                }
-            }
-            self.isLoadMore = false
-            self.mainTableView?.reloadData()
-            if #available(iOS 10.0, *) {
-                self.mainTableView?.refreshControl?.endRefreshing()
-            } else {
-                // Fallback on earlier versions
+                //FIXME: 这里需要弹hud提示信息
+                print(errorStr ?? "")
             }
         }
     }
@@ -76,7 +71,7 @@ extension FSHomeController{
 //MARK: tableviewDataSource  tableviewDelegate
 extension FSHomeController{
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return datasArray.count
+        return statusesViewModel.statusesList.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -84,7 +79,7 @@ extension FSHomeController{
         if cell == nil {
             cell = UITableViewCell.init(style: .default, reuseIdentifier: "cellId")
         }
-        cell?.textLabel?.text = datasArray[indexPath.row]
+        cell?.textLabel?.text = statusesViewModel.statusesList[indexPath.row].text
         return cell!
     }
     
@@ -92,7 +87,7 @@ extension FSHomeController{
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         let row = indexPath.row
         //这里判断到滑到最后一个
-        if row == datasArray.count-1 {
+        if row == statusesViewModel.statusesList.count-1 {
             isLoadMore = true
             loadData()
         }

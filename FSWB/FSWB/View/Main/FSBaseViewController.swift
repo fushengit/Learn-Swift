@@ -15,7 +15,7 @@ class FSBaseViewController: UIViewController {
     var mainTableView:UITableView?
     var visiterView:FSVisiterView?
     var visiterInfo:[String:String]?
-    var isLoginOn = false
+    var isLoginOn = true
     
     //重写set方法实现自定义的问题
     override var title: String?{
