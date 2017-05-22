@@ -15,7 +15,9 @@ class FSBaseViewController: UIViewController {
     var mainTableView:UITableView?
     var visiterView:FSVisiterView?
     var visiterInfo:[String:String]?
-    var isLoginOn = true
+    var isLoginOn:Bool{
+        return FSNetWorkManager.shared.authModel.access_token != nil
+    }
     
     //重写set方法实现自定义的问题
     override var title: String?{
@@ -27,6 +29,7 @@ class FSBaseViewController: UIViewController {
         super.viewDidLoad()
         //设置UI
         setUI()
+        NotificationCenter.default.addObserver(self, selector: #selector(loginSuccAction), name: NSNotification.Name(rawValue: NotifycationLoginSucc), object: nil)
     }
     //MARK: 子类继承网络数据请求方法
     @objc func loadData() {
@@ -39,6 +42,20 @@ class FSBaseViewController: UIViewController {
             }
         }
     }
+    //MARK: 登录事件
+    @objc func loginAction(){
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotifycationLogin), object: nil)
+    }
+    //MARK: 登录成功事件回调
+    @objc func loginSuccAction(){
+        NotificationCenter.default.removeObserver(self)
+        view = nil
+    }
+
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
 }
 
 //MARK: UI设置方法
@@ -87,6 +104,7 @@ extension FSBaseViewController:UITableViewDelegate,UITableViewDataSource{
     func setVisiterView() {
         visiterView = FSVisiterView(frame: view.bounds)
         visiterView?.visitorInfo = visiterInfo
+        visiterView?.loginBtn.addTarget(self, action: #selector(loginAction), for: .touchUpInside)
         view.insertSubview(visiterView!, at: 0)
     }
 }

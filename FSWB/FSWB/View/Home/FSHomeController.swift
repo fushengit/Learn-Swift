@@ -39,10 +39,6 @@ class FSHomeController: FSBaseViewController {
     @objc fileprivate func friendAction() {
         print("跳转好友页面")
     }
-    //FIXME: 未实现登录真实逻辑
-    @objc fileprivate func loginAction() {
-        print("登录事件")
-    }
 }
 
 

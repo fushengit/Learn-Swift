@@ -16,9 +16,13 @@ enum RequstType {
 
 class FSNetWorkManager: AFHTTPSessionManager {
     //创建一个单利
-    static let shared = FSNetWorkManager()
-    //
-    var accessToken:String? = "2.00VETnVGWKgFsDc61689eb510r3a9q"
+    static let shared:FSNetWorkManager = {
+        let manager = FSNetWorkManager()
+        manager.responseSerializer.acceptableContentTypes?.insert("text/plain")
+        return manager
+    }()
+    
+    lazy var authModel = FSWBAuthModel()
     
     //网络请求封装方法
     func asyncRquest(requstType:RequstType = .GET, URLString:String ,param:[String:String]? ,requestComplete:@escaping (_ isSucc:Bool,_ task:URLSessionDataTask?,_ json:Any?,_ error:Error?)->()) {
@@ -33,6 +37,7 @@ class FSNetWorkManager: AFHTTPSessionManager {
                 
             }
             requestComplete(false, task, nil, error)
+            print(error)
         }
         if requstType == .GET {
             get(URLString, parameters: param, progress: nil, success: { (task, json) in
@@ -55,14 +60,14 @@ class FSNetWorkManager: AFHTTPSessionManager {
         if param == nil {
             param = [String:String]()
         }
-        if accessToken == nil {
+        if authModel.access_token == nil {
             //FIXME: 未登录，通知界面做登录处理
             
             
             requestComplete(false, nil, nil, nil)
             return
         }
-        param!["access_token"] = accessToken
+        param!["access_token"] = authModel.access_token
         asyncRquest(requstType: requstType, URLString: URLString, param: param, requestComplete: requestComplete)
     }
 }

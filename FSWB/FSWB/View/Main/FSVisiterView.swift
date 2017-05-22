@@ -11,7 +11,9 @@ import UIKit
 class FSVisiterView: UIView {
     fileprivate let imageView = UIImageView()
     fileprivate let titleLabel = UILabel()
-
+    var loginBtn = UIButton.init()
+    var registBtn = UIButton.init()
+    
     //MARK: visitorInfo 目前需要包含两个key：imageName，titleText
     var visitorInfo:[String:String]? {
         didSet{
@@ -57,7 +59,7 @@ extension FSVisiterView{
         titleLabel.numberOfLines = 0
         addSubview(titleLabel)
         
-        let loginBtn = UIButton.init()
+        
         loginBtn.setTitle("登录", for: .normal)
         loginBtn.setTitleColor(UIColor.orange, for: .normal)
         loginBtn.layer.masksToBounds = true
@@ -65,7 +67,6 @@ extension FSVisiterView{
         loginBtn.layer.borderColor = UIColor.orange.cgColor
         addSubview(loginBtn)
         
-        let registBtn = UIButton.init()
         registBtn.setTitle("注册", for: .normal)
         registBtn.setTitleColor(UIColor.orange, for: .normal)
         registBtn.layer.masksToBounds = true

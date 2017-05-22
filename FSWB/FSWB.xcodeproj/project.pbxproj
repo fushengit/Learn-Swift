@@ -25,6 +25,9 @@
 		9DC24C091EC94D6000B17084 /* FSProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC24C081EC94D6000B17084 /* FSProfileController.swift */; };
 		9DC24C0B1EC9782000B17084 /* FSDemoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC24C0A1EC9782000B17084 /* FSDemoController.swift */; };
 		9DDBFF011ECD4B4000999705 /* main.json in Resources */ = {isa = PBXBuildFile; fileRef = 9DDBFF001ECD4B4000999705 /* main.json */; };
+		9DF6A93F1ED2761200869F8D /* FSCommon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DF6A93E1ED2761200869F8D /* FSCommon.swift */; };
+		9DF6A9411ED2789900869F8D /* FSAuthController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DF6A9401ED2789900869F8D /* FSAuthController.swift */; };
+		9DF6A9431ED2ADBC00869F8D /* FSWBAuthModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DF6A9421ED2ADBC00869F8D /* FSWBAuthModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,6 +52,9 @@
 		9DC24C081EC94D6000B17084 /* FSProfileController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FSProfileController.swift; sourceTree = "<group>"; };
 		9DC24C0A1EC9782000B17084 /* FSDemoController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FSDemoController.swift; sourceTree = "<group>"; };
 		9DDBFF001ECD4B4000999705 /* main.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = main.json; sourceTree = "<group>"; };
+		9DF6A93E1ED2761200869F8D /* FSCommon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FSCommon.swift; sourceTree = "<group>"; };
+		9DF6A9401ED2789900869F8D /* FSAuthController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FSAuthController.swift; sourceTree = "<group>"; };
+		9DF6A9421ED2ADBC00869F8D /* FSWBAuthModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FSWBAuthModel.swift; sourceTree = "<group>"; };
 		D32320FA84000738A58FDD83 /* Pods-FSWB.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FSWB.release.xcconfig"; path = "Pods/Target Support Files/Pods-FSWB/Pods-FSWB.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -77,6 +83,7 @@
 			isa = PBXGroup;
 			children = (
 				9D58C8C41ECEC1FE00833E2E /* FSStatusesModel.swift */,
+				9DF6A9421ED2ADBC00869F8D /* FSWBAuthModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -127,6 +134,7 @@
 				9DA8D67C1EC5CBF100350D1C /* Bundle+Extention.swift */,
 				9D58C8C01ECE8AB400833E2E /* FSNetWorkManager.swift */,
 				9D58C8C21ECE9AD900833E2E /* FSNetWorkManager+WB.swift */,
+				9DF6A93E1ED2761200869F8D /* FSCommon.swift */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -167,6 +175,7 @@
 				9DA8D6741EC5C71D00350D1C /* FSMainTabbarController.swift */,
 				9DA8D6761EC5C97B00350D1C /* FSBaseNavigationController.swift */,
 				9DA8D6781EC5C99800350D1C /* FSBaseViewController.swift */,
+				9DF6A9401ED2789900869F8D /* FSAuthController.swift */,
 				9D785C981ECC65FE00D080E1 /* FSVisiterView.swift */,
 			);
 			path = Main;
@@ -327,10 +336,13 @@
 				9DC24C071EC94D4E00B17084 /* FSDiscoverController.swift in Sources */,
 				9DA8D6791EC5C99800350D1C /* FSBaseViewController.swift in Sources */,
 				9DC24C051EC94D3A00B17084 /* FSMessageController.swift in Sources */,
+				9DF6A9431ED2ADBC00869F8D /* FSWBAuthModel.swift in Sources */,
 				9DC24C0B1EC9782000B17084 /* FSDemoController.swift in Sources */,
 				9D58C8C11ECE8AB400833E2E /* FSNetWorkManager.swift in Sources */,
 				9DA8D6751EC5C71D00350D1C /* FSMainTabbarController.swift in Sources */,
 				9D58C8C51ECEC1FE00833E2E /* FSStatusesModel.swift in Sources */,
+				9DF6A9411ED2789900869F8D /* FSAuthController.swift in Sources */,
+				9DF6A93F1ED2761200869F8D /* FSCommon.swift in Sources */,
 				9DA8D6771EC5C97B00350D1C /* FSBaseNavigationController.swift in Sources */,
 				9DA8D65A1EC5C22100350D1C /* AppDelegate.swift in Sources */,
 				9D58C8C31ECE9AD900833E2E /* FSNetWorkManager+WB.swift in Sources */,

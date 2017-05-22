@@ -25,4 +25,21 @@ extension FSNetWorkManager{
             complete(isSucc, result, (task?.response as? HTTPURLResponse)?.statusCode)
         }
     }
+    
+    func requestOauthToken(code:String,complete:@escaping (_ isSucc:Bool)->()) -> () {
+        let urlStr = "https://api.weibo.com/oauth2/access_token"
+        let param = ["client_id":WBclient_id,
+                     "client_secret":WBclient_secret,
+                     "grant_type":"authorization_code",
+                     "code":code,
+                     "redirect_uri":WBredirect_uri]
+        FSNetWorkManager.shared.asyncRquest(requstType: .POST, URLString: urlStr, param: param) { (isSucc, task, json, error) in
+            if isSucc{
+                self.authModel.yy_modelSet(withJSON: json ?? [:])
+                self.authModel.saveToLocal()
+                print(self.authModel)
+                complete(isSucc)
+            }
+        }
+    }
 }

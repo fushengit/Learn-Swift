@@ -14,12 +14,22 @@ class FSMainTabbarController: UITabBarController {
         setUpChildControllers()
         //设置评论按钮
         setUpComposeBtn()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(loginAction), name: NSNotification.Name(rawValue: NotifycationLogin), object: nil)
     }
     
-    //FIXME: 未实现真实跳转
-    //评论按钮点击事件
+    //FIXME: 评论按钮点击事件,未实现真实跳转
     @objc func composeAction(){
         print("我要发表")
+    }
+    //登录事件
+    @objc func loginAction(){
+        let nav = UINavigationController(rootViewController: FSAuthController())
+        present(nav, animated: true, completion: nil)
+    }
+    //移除通知
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
 }
 
@@ -70,7 +80,6 @@ extension FSMainTabbarController{
     //MARK: 返回从磁盘中获取的控制器数据 ，然后从服务器请求控制器数据json以便下次启动使用
     private func requestMainInfo() ->[[String:Any]] {
         let filePathStr = String(format: "%@/Library/Caches/resultMain.json", NSHomeDirectory())
-        print(filePathStr)
         //读取磁盘中的配置
         var array:[[String:Any]]? = NSArray.init(contentsOfFile: filePathStr) as? [[String:Any]]
         //磁盘中如果没有，则读项目中默认的配置
@@ -79,14 +88,14 @@ extension FSMainTabbarController{
                 array = NSArray(contentsOfFile: jsonPatch) as? [[String:Any]]
             }
         }
+        //FIXME: 这里需要提供真实的网络接口
         //这里我们模拟网络请求 并把请求的数据写入磁盘
         URLSession.shared.dataTask(with: URL.init(string: "http://www.baidu.com")!) { (data, response, error) in
             if error == nil{
                 //这里我们把项目里面默认的写进磁盘做测试
                 if let dataPath = Bundle.main.path(forResource: "main.json", ofType: nil) {
                     let dataArray = NSArray(contentsOfFile: dataPath);
-                    let result =  dataArray?.write(toFile: filePathStr, atomically: true)
-                    print("操作结果：\(result)")
+                    let _ =  dataArray?.write(toFile: filePathStr, atomically: true)
                 }
             }
         }.resume()
