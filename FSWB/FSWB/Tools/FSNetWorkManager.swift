@@ -32,9 +32,7 @@ class FSNetWorkManager: AFHTTPSessionManager {
         let failure = { (task:URLSessionDataTask?,error:Error) -> () in
             if (task?.response as? HTTPURLResponse)?.statusCode == 403 {
                 print("token无效，需要重新授权登录")
-                //FIXME: 未登录，通知界面做登录处理
-
-                
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotifycationLogin), object: nil)
             }
             requestComplete(false, task, nil, error)
             print(error)
@@ -61,9 +59,7 @@ class FSNetWorkManager: AFHTTPSessionManager {
             param = [String:String]()
         }
         if authModel.access_token == nil {
-            //FIXME: 未登录，通知界面做登录处理
-            
-            
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotifycationLogin), object: nil)
             requestComplete(false, nil, nil, nil)
             return
         }

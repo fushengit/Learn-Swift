@@ -26,6 +26,11 @@ extension FSNetWorkManager{
         }
     }
     
+    /// 获取授权过的Access Token
+    ///
+    /// - Parameters:
+    ///   - code: 	调用authorize获得的code值
+    ///   - complete: <#complete description#>
     func requestOauthToken(code:String,complete:@escaping (_ isSucc:Bool)->()) -> () {
         let urlStr = "https://api.weibo.com/oauth2/access_token"
         let param = ["client_id":WBclient_id,
@@ -36,10 +41,26 @@ extension FSNetWorkManager{
         FSNetWorkManager.shared.asyncRquest(requstType: .POST, URLString: urlStr, param: param) { (isSucc, task, json, error) in
             if isSucc{
                 self.authModel.yy_modelSet(withJSON: json ?? [:])
-                self.authModel.saveToLocal()
-                print(self.authModel)
+                FSNetWorkManager.shared.requestUserInfo(complete: { (profileSucc) in
+                    complete(profileSucc)
+                })
+            }else{
                 complete(isSucc)
             }
+        }
+    }
+    
+    /// 获取用户信息
+    ///
+    /// - Parameter complete: <#complete description#>
+    func requestUserInfo(complete:@escaping(_ isSucc:Bool)->()) -> () {
+        let urlStr = "https://api.weibo.com/2/users/show.json"
+        let param = ["uid":authModel.uid ?? ""]
+        FSNetWorkManager.shared.asyncTokenRquest(URLString: urlStr, param: param) { (isSucc, task, json, error) in
+            self.authModel.yy_modelSet(withJSON: json ?? [:])
+            self.authModel.saveToLocal()
+            print(self.authModel)
+            complete(isSucc)
         }
     }
 }

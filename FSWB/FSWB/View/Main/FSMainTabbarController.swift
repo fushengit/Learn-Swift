@@ -14,7 +14,9 @@ class FSMainTabbarController: UITabBarController {
         setUpChildControllers()
         //设置评论按钮
         setUpComposeBtn()
-        
+        //设置代理
+        delegate = self
+        //添加登录通知监听
         NotificationCenter.default.addObserver(self, selector: #selector(loginAction), name: NSNotification.Name(rawValue: NotifycationLogin), object: nil)
     }
     
@@ -39,14 +41,14 @@ extension FSMainTabbarController{
         for dict in requestMainInfo() {
             controllers.append(getController(dict: dict))
         }
-        self.viewControllers = controllers
+        viewControllers = controllers
     }
     
     func setUpComposeBtn() {
         let composeBtn = UIButton(type: .custom)
         tabBar.addSubview(composeBtn)
         let count = CGFloat(childViewControllers.count)
-        let btnW = tabBar.bounds.width/count - 1
+        let btnW = tabBar.bounds.width/count
         composeBtn.frame = tabBar.bounds.insetBy(dx: btnW * 2, dy: 0)
         composeBtn.setBackgroundImage(UIImage.init(named: "tabbar_compose_button"), for: .normal)
         composeBtn.setImage(UIImage.init(named: "tabbar_compose_icon_add"), for: .normal)
@@ -100,5 +102,28 @@ extension FSMainTabbarController{
             }
         }.resume()
         return array!
+    }
+}
+
+//MARK:UITabBarControllerDelegate
+extension FSMainTabbarController:UITabBarControllerDelegate{
+    func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
+        let navController = viewController as! FSBaseNavigationController
+        guard let shuldSelectContrller = navController.childViewControllers.first as? FSBaseViewController else {
+            return false
+        }
+        let currentNav = viewControllers?[selectedIndex] as? FSBaseNavigationController
+        guard let currentContrller = currentNav?.childViewControllers.first as? FSBaseViewController else {
+            return false
+        }
+        //当前展示的controller和选中展示的controller都是FSHomeController 的情况下，刷新列表
+        if shuldSelectContrller == currentContrller && shuldSelectContrller.isKind(of: FSHomeController.self) && shuldSelectContrller.isLoginOn {
+            //滑动到最顶层
+            shuldSelectContrller.mainTableView?.setContentOffset(CGPoint.init(x: 0, y: -64), animated: true)
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+0.5, execute: { 
+                shuldSelectContrller.loadData()
+            })
+        }
+        return true
     }
 }

@@ -12,13 +12,16 @@ class FSHomeController: FSBaseViewController {
 
     lazy var statusesViewModel = FSStatusesViewModel()
     var isLoadMore = false //是否是加载更多事件
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         loadData()
     }
     
     override func loadData() {
+        if isLoginOn == false {
+            return
+        }
         statusesViewModel.loadData(isLoadMore: isLoadMore) { (isSucc, errorStr) in
             if isSucc{
                 self.isLoadMore = false
@@ -39,8 +42,8 @@ class FSHomeController: FSBaseViewController {
     @objc fileprivate func friendAction() {
         print("跳转好友页面")
     }
+    
 }
-
 
 
 //MARK: UI设置

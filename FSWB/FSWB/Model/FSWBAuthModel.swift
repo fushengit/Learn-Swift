@@ -21,6 +21,11 @@ class FSWBAuthModel: NSObject {
     var uid:String?
     //自定义属性，方便展示
     var expiresDate:Date?
+    
+    //用户昵称
+    var screen_name:String?
+    //用户头像
+    var avatar_large:String?
 
     override var description: String{
         return yy_modelDescription()

@@ -55,7 +55,6 @@ class FSBaseViewController: UIViewController {
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
-    
 }
 
 //MARK: UI设置方法

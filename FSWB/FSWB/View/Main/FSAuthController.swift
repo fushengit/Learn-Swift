@@ -37,11 +37,11 @@ class FSAuthController: UIViewController {
         view = webView
     }
     
-    @objc func closeAction(){
+    @objc fileprivate func closeAction(){
         dismiss(animated: true, completion: nil)
     }
     
-    @objc func automicFixin(){
+    @objc fileprivate func automicFixin(){
         //FIXME: 这里填自己的账号密码哇！！！
         let userName = "12345678"
         let password = "123456"
@@ -51,6 +51,7 @@ class FSAuthController: UIViewController {
     }
 }
 
+//MAKR: UIWebViewDelegate
 extension FSAuthController:UIWebViewDelegate{
     func webViewDidStartLoad(_ webView: UIWebView) {
         SVProgressHUD.show()
@@ -85,6 +86,9 @@ extension FSAuthController:UIWebViewDelegate{
                 self.closeAction()
             }else{
                 SVProgressHUD.showInfo(withStatus: "网络请求失败")
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 3, execute: { 
+                    self.closeAction()
+                })
             }
         }
         return false
