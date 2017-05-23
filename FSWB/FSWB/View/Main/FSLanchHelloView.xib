@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="FSLanchHelloView" customModule="FSWB" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Default" translatesAutoresizingMaskIntoConstraints="NO" id="9MX-Vf-jh5">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="avatar_default" translatesAutoresizingMaskIntoConstraints="NO" id="7Ec-TI-hTU">
+                    <rect key="frame" x="137" y="387" width="100" height="100"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="100" id="Xzn-zv-Z9Q"/>
+                        <constraint firstAttribute="width" constant="100" id="iqo-vA-szv"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="欢迎回来" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XVW-zL-izJ">
+                    <rect key="frame" x="152.5" y="502" width="69.5" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="9MX-Vf-jh5" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="IBX-Q3-HoF"/>
+                <constraint firstAttribute="bottom" secondItem="9MX-Vf-jh5" secondAttribute="bottom" id="MPJ-jP-LM7"/>
+                <constraint firstAttribute="trailing" secondItem="9MX-Vf-jh5" secondAttribute="trailing" id="NgP-MY-Zlq"/>
+                <constraint firstAttribute="bottom" secondItem="7Ec-TI-hTU" secondAttribute="bottom" constant="180" id="X50-KT-NMa"/>
+                <constraint firstItem="9MX-Vf-jh5" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="g0j-Nk-97C"/>
+                <constraint firstItem="XVW-zL-izJ" firstAttribute="top" secondItem="7Ec-TI-hTU" secondAttribute="bottom" constant="15" id="nwk-Zj-KSJ"/>
+                <constraint firstItem="XVW-zL-izJ" firstAttribute="centerX" secondItem="7Ec-TI-hTU" secondAttribute="centerX" id="xvu-0u-mSt"/>
+                <constraint firstItem="7Ec-TI-hTU" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="zSy-4h-lHs"/>
+            </constraints>
+            <connections>
+                <outlet property="iconImageView" destination="7Ec-TI-hTU" id="fSc-3k-RXc"/>
+                <outlet property="iconImageViewBottom" destination="X50-KT-NMa" id="QJj-Ns-GiV"/>
+                <outlet property="showLabel" destination="XVW-zL-izJ" id="QD3-U8-0vj"/>
+            </connections>
+            <point key="canvasLocation" x="38" y="-404"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="Default" width="320" height="480"/>
+        <image name="avatar_default" width="50" height="50"/>
+    </resources>
+</document>

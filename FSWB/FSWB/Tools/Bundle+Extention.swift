@@ -12,4 +12,9 @@ extension Bundle{
     var nameSpace:String{
         return Bundle.main.infoDictionary?["CFBundleName"] as? String ?? ""
     }
+    
+    var versionString:String{
+        return Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? ""
+    }
 }
+

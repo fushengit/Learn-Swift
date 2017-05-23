@@ -50,6 +50,20 @@ class FSHomeController: FSBaseViewController {
 extension FSHomeController{
     override func setNavBar() {
         super.setNavBar()
+        if isLoginOn {
+            let titleBtn = UIButton()
+            myBarItem.titleView = titleBtn
+            titleBtn.setImage(UIImage.init(named: "navigationbar_arrow_up"), for: [])
+            titleBtn.setImage(UIImage.init(named: "navigationbar_arrow_down"), for: .selected)
+            titleBtn.addTarget(self, action: #selector(titleBtnTouched), for: .touchUpInside)
+            titleBtn.setTitle((FSNetWorkManager.shared.authModel.screen_name ?? "")+" ", for: [])
+            titleBtn.setTitleColor(UIColor.darkGray, for: [])
+            titleBtn.sizeToFit()
+        }
+    }
+    
+    @objc private func titleBtnTouched(btn:UIButton) -> () {
+        btn.isSelected = !btn.isSelected
     }
     override func setTableView() {
         super.setTableView()

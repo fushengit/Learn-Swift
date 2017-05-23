@@ -9,15 +9,22 @@
 import UIKit
 
 class FSMainTabbarController: UITabBarController {
+    fileprivate var isLoginOn:Bool{
+        return FSNetWorkManager.shared.authModel.access_token != nil
+    }
+    
     override func viewDidLoad() {
         //设置字控制器
         setUpChildControllers()
         //设置评论按钮
         setUpComposeBtn()
+        //设置新特性引导图或启动欢迎页面
+        setLanchView()
         //设置代理
         delegate = self
         //添加登录通知监听
         NotificationCenter.default.addObserver(self, selector: #selector(loginAction), name: NSNotification.Name(rawValue: NotifycationLogin), object: nil)
+        
     }
     
     //FIXME: 评论按钮点击事件,未实现真实跳转
@@ -36,7 +43,7 @@ class FSMainTabbarController: UITabBarController {
 }
 
 extension FSMainTabbarController{
-    func setUpChildControllers(){
+    fileprivate func setUpChildControllers(){
         var controllers:[FSBaseNavigationController] = [FSBaseNavigationController]()
         for dict in requestMainInfo() {
             controllers.append(getController(dict: dict))
@@ -44,7 +51,7 @@ extension FSMainTabbarController{
         viewControllers = controllers
     }
     
-    func setUpComposeBtn() {
+    fileprivate func setUpComposeBtn() {
         let composeBtn = UIButton(type: .custom)
         tabBar.addSubview(composeBtn)
         let count = CGFloat(childViewControllers.count)
@@ -81,9 +88,8 @@ extension FSMainTabbarController{
 
     //MARK: 返回从磁盘中获取的控制器数据 ，然后从服务器请求控制器数据json以便下次启动使用
     private func requestMainInfo() ->[[String:Any]] {
-        let filePathStr = String(format: "%@/Library/Caches/resultMain.json", NSHomeDirectory())
         //读取磁盘中的配置
-        var array:[[String:Any]]? = NSArray.init(contentsOfFile: filePathStr) as? [[String:Any]]
+        var array:[[String:Any]]? = NSArray.init(contentsOfFile: "resultMain.json".documentsPath) as? [[String:Any]]
         //磁盘中如果没有，则读项目中默认的配置
         if array == nil {
             if let jsonPatch = Bundle.main.path(forResource: "main.json", ofType: nil) {
@@ -97,11 +103,29 @@ extension FSMainTabbarController{
                 //这里我们把项目里面默认的写进磁盘做测试
                 if let dataPath = Bundle.main.path(forResource: "main.json", ofType: nil) {
                     let dataArray = NSArray(contentsOfFile: dataPath);
-                    let _ =  dataArray?.write(toFile: filePathStr, atomically: true)
+                    let _ =  dataArray?.write(toFile: "resultMain.json".documentsPath, atomically: true)
                 }
             }
         }.resume()
         return array!
+    }
+    
+    fileprivate func setLanchView() {
+        if isLoginOn == false{
+            return
+        }
+        //1.获取当前版本号
+        let currentVersion = Bundle.main.versionString
+        //2.从缓存中拿出以前记录的版本号
+        let pastVersion = UserDefaults.standard.object(forKey: "versionString") as? String
+        //3.将当前版本号存入缓存
+        UserDefaults.standard.set(currentVersion, forKey: "versionString")
+        //4.判断两个版本号是否相同，如果相同则显示欢迎页面，不同则显示引导新特性页面
+        if currentVersion == pastVersion {
+            view.addSubview(FSLanchHelloView.hellowView())
+        }else{
+            view.addSubview(FSLanchLeadView.leadView())
+        }
     }
 }
 

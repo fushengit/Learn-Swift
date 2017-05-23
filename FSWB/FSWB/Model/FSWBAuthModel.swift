@@ -38,16 +38,13 @@ class FSWBAuthModel: NSObject {
             return
         }
         dict.removeValue(forKey: "expires_in")
-        let authPath = String(format: "%@/Library/Caches/authPath.json", NSHomeDirectory())
-        (data as NSData).write(toFile: authPath, atomically: true)
-        print(authPath)
+        (data as NSData).write(toFile:"authPath.json".documentsPath, atomically: true)
     }
     
     //重写构造函数方法从磁盘读取数据
     override init() {
         super.init()
-        let authPath = String(format: "%@/Library/Caches/authPath.json", NSHomeDirectory())
-        guard let data = NSData(contentsOfFile: authPath) as? Data,
+        guard let data = NSData(contentsOfFile: "authPath.json".documentsPath) as? Data,
             let jsonDict = try? JSONSerialization.jsonObject(with: data, options: [])
             else {
             return
@@ -59,7 +56,7 @@ class FSWBAuthModel: NSObject {
             expiresDate = nil
             access_token = nil
             uid = nil
-            try? FileManager.default.removeItem(atPath: authPath)
+            try? FileManager.default.removeItem(atPath: "authPath.json".documentsPath)
         }
         print(self)
     }
